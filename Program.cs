@@ -12,6 +12,8 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Util.Store;
 using Microsoft.IdentityModel.Protocols;
 using System.Net.Http.Headers;
+using Microsoft.Extensions.Configuration.Json;
+using Microsoft.Extensions.Configuration;
 using System;
 using static Jadlam_ProductsUpdater.Program;
 
@@ -24,7 +26,7 @@ namespace Jadlam_ProductsUpdater
         static string path = AppDomain.CurrentDomain.BaseDirectory +"/ErrorLogs/";
         static string logFilePath = AppDomain.CurrentDomain.BaseDirectory + "/process_log.txt";
         static string accesstoken = string.Empty;
-        static string connectionString = "Server=51.143.185.157; Database=Jadlamstaging; Integrated Security=false; User ID=admins; Password=Inform@2020*; Column Encryption Setting=enabled; TrustServerCertificate=True; Connection Timeout=3600";
+        static string connectionString;
         static DataTable dt = new DataTable();
         static DataTable dataasdacin = new DataTable();
 
@@ -87,6 +89,23 @@ namespace Jadlam_ProductsUpdater
                     //-------------------------------------------------------------------------------------------------------------------------------------
                     Accesstoken accesstokens = GetAccessToken();
                     string accesstoken = accesstokens.access_token;
+
+
+                    string projectRoot = Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName;
+
+                    // Load configuration
+                    var config = new ConfigurationBuilder()
+                        .SetBasePath(projectRoot)
+                        .AddJsonFile("appsetting.json", optional: false, reloadOnChange: true)
+                        .Build();
+
+                    // ✅ Initialize the connection string
+                    bool istest = true; // Replace with actual condition
+                    connectionString = istest
+                        ? config.GetConnectionString("TestDB")
+                        : config.GetConnectionString("ProductionDB");
+
+                    Console.WriteLine("Using Connection String: " + connectionString);
 
                     string fullUrl = url + "&access_token=" + accesstoken;
                     //-------------------------------------------------------------------------------------------------------------------------------------
