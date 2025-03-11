@@ -1,6 +1,6 @@
 {
   "ConnectionStrings": {
-    "LiveDB": "Server=51.143.185.157; Database=Jadlam; Integrated Security=false; User ID=admins; Password=Inform@2020*; Column Encryption Setting=enabled; TrustServerCertificate=True",
+    //"LiveDB": "Server=51.143.185.157; Database=Jadlam; Integrated Security=false; User ID=admins; Password=Inform@2020*; Column Encryption Setting=enabled; TrustServerCertificate=True",
     "TestDB": "Server=azuresql25.database.windows.net; Database=JadlamStaging_azure; Integrated Security=false; User ID=sqladmin; Password=admin@100%secure; Column Encryption Setting=enabled; TrustServerCertificate=True; Connection Timeout=3600"
   }
 }

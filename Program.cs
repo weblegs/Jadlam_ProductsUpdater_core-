@@ -23,6 +23,7 @@ namespace Jadlam_ProductsUpdater
     class Program
     {
         #region GLOBAL VARIABLES
+        static bool islocal = true;
         static string path = AppDomain.CurrentDomain.BaseDirectory +"/ErrorLogs/";
         static string logFilePath = AppDomain.CurrentDomain.BaseDirectory + "/process_log.txt";
         static string accesstoken = string.Empty;
@@ -100,8 +101,8 @@ namespace Jadlam_ProductsUpdater
                         .Build();
 
                     // ✅ Initialize the connection string
-                    bool istest = true; // Replace with actual condition
-                    connectionString = istest
+                  // Replace with actual condition
+                    connectionString = islocal
                         ? config.GetConnectionString("TestDB")
                         : config.GetConnectionString("ProductionDB");
 
